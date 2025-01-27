@@ -1,4 +1,25 @@
-# BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)
+BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)
+------------------------------------------------------------------------------
+- [BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)](#bil-222-system-programmingspring-2025-dept-of-computer-engineering-istanbul-medeniyet-unv)
+- [Meeting Times](#meeting-times)
+- [Prerequisites](#prerequisites)
+- [Overview](#overview)
+- [Learning Outcomes](#learning-outcomes)
+- [Textbooks and Course Material](#textbooks-and-course-material)
+- [Weekly Content (you might see slight changes during the semester.)](#weekly-content-you-might-see-slight-changes-during-the-semester)
+- [Quizzes and labs](#quizzes-and-labs)
+- [Homework-coding assignments](#homework-coding-assignments)
+- [Grading](#grading)
+- [Course sites](#course-sites)
+- [Environment Settings](#environment-settings)
+- [For discussions,](#for-discussions)
+- [Collaboration and Cheating Policy](#collaboration-and-cheating-policy)
+- [Use of AI, GPT, Gemini, DeepSeek, etc.](#use-of-ai-gpt-gemini-deepseek-etc)
+  - [Example use and prompts:](#example-use-and-prompts)
+    - [**General prompts related to Lectures \& Theory**](#general-prompts-related-to-lectures--theory)
+    - [**Prompts for Code Examples**](#prompts-for-code-examples)
+    - [**Labs \& Assignments**](#labs--assignments)
+
 ## Meeting Times
 - Labs on wednesdays,
 - Lecture on Thursdays @517
