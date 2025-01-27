@@ -117,9 +117,10 @@ Any kind of plagiarism and cheating are prohibited (Please, refer to the univers
 If you benefit from some work of others, list them as references (online references or books) 
 Discussing the assignments or projects with your friends is allowed; but, all the submitted work should be yours alone. List your collaborators (if you discuss your homework with your friends) in your assignments.
 
-## Use of AI, GPT, Gemini, DeepSeek, etc.
-You are free to use them... However,over-reliance may prevent you from thinking 
-Below is example guide how you can leverage such tools for this course(taken from DeepSeek R1) 
+## Use of AI, GPT, Gemini, DeepSeek, etc. 
+You are free to use them... However,over-reliance may prevent you from thinking.
+ 
+Below (**written with the help of DeepSeek R1**) is example guide how you can leverage such tools for this course 
 * You can use AI's capabilities for explanations, code examples, debugging, and interactive learning.
 
 ### Example use and prompts:
