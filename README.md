@@ -1,6 +1,7 @@
 BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)
 ------------------------------------------------------------------------------
-* for pdf and pptx(converted from  google slides), see [lectures](lectures)
+* for pdf (converted from  google slides), see [lectures](lectures)
+
 - [BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)](#bil-222-system-programmingspring-2025-dept-of-computer-engineering-istanbul-medeniyet-unv)
 - [Meeting Times](#meeting-times)
 - [Prerequisites](#prerequisites)
@@ -56,7 +57,7 @@ During the semester, in addition to weekly lectures and lab sessions, there are 
   
 ## Weekly Content (you might see slight changes during the semester.)
 
-* for pdf and pptx(converted from  google slides), see [lectures](lectures)
+* for pdf (converted from  google slides), see [lectures](lectures)
 1. Course administrivia,  crash course on C, compiler steps, object files
 2. Macros, Makefiles, Gdb, Version Control (Git)
 3. Review of  pointers, pointer arithmetic, function pointers
