@@ -55,6 +55,7 @@ During the semester, in addition to weekly lectures and lab sessions, there are 
 - For C programming, you can refer to "The C Programming Language", by Brian W. Kernighan, Dennis M. Ritchie.
   
 ## Weekly Content (you might see slight changes during the semester.)
+
 * for pdf and pptx(converted from  google slides), see [lectures](lectures)
 1. Course administrivia,  crash course on C, compiler steps, object files
 2. Macros, Makefiles, Gdb, Version Control (Git)
