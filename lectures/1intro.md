@@ -1,3 +1,29 @@
+---
+title: "System Programming - Introduction"
+author: "Ammar Daskin"
+institute: "Istanbul Medeniyet University, Computer Engineering Department"
+urlcolor: red
+linkstyle: bold
+aspectratio: 169
+theme: black
+transition: slide
+controls: true
+controlsTutorial: true
+slideNumber: true
+hash: true
+center: false
+align-items: left
+align-content: left
+justify-content: left
+lang: tr
+output: revealjs::revealjs_presentation
+---
+<style type="text/css">
+div {
+  font-size: clamp(16px, 3vw, 32px);
+}
+</style>
+
 # 🎓 BIL 222 System Programming - Spring 2024  
 **Instructor: Ammar Daskin**  
 **📍 Classroom: B517**  
@@ -37,6 +63,19 @@
 | 📝 **Programming Assignments** | 30% | 3-4 projects (individual/group)       |
 | 📘 **Midterm Exam**        | 20%    | Theory & implementation               |
 | 📚 **Final Exam**          | 40%    | Comprehensive assessment              |
+
+---
+
+## Letter grades
+- $> 90$ or $\approx$ top 10% AA
+- $<35$ is FF.
+- median $x$, and standard deviation $2s$ (we use half)
+  - BA: $\approx[x+3s, x+4s)$ 
+  - BB: $\approx[x+2s, x+3s]$ 
+  - BC: $\approx[x+1s, x+2s)$ 
+  - CC: $\approx[x-1s, x+1s)$ 
+  - DC: $\approx[x-2s, x-1s)$ 
+  - Depending on the value of $s$ and $x$, some slight changes may occur...  
 
 ---
 
