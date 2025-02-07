@@ -1,5 +1,7 @@
 BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)
 ------------------------------------------------------------------------------
+* for pdf (converted from  google slides), see [lectures](lectures)
+
 - [BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul Medeniyet Unv.)](#bil-222-system-programmingspring-2025-dept-of-computer-engineering-istanbul-medeniyet-unv)
 - [Meeting Times](#meeting-times)
 - [Prerequisites](#prerequisites)
@@ -12,6 +14,8 @@ BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul M
 - [Grading](#grading)
 - [Course sites](#course-sites)
 - [Environment Settings](#environment-settings)
+  - [Install Valgrind package](#install-valgrind-package)
+  - [Open a github account (If you do not have one)](#open-a-github-account-if-you-do-not-have-one)
 - [For discussions,](#for-discussions)
 - [Collaboration and Cheating Policy](#collaboration-and-cheating-policy)
 - [Use of AI, GPT, Gemini, DeepSeek, etc.](#use-of-ai-gpt-gemini-deepseek-etc)
@@ -30,7 +34,7 @@ This course introduces students to the basics of system programming in Unix. In 
 This course goes through systems from a programmer’s perspective: That is at the boundary of the user and kernel spaces, it shows how to interact with the systems from the user space.  Therefore, it prepares students for more advanced courses such as operating systems and computer architectures that discuss the internals of a computer system. 
 During the semester, in addition to weekly lectures and lab sessions, there are programming assignments and in class quizzes. It is crucial for students to follow weekly lectures and labs to learn the material and complete the assignments. 
 ## Learning Outcomes
-Knowledge of the topics listed in the weekly content below.
+- Knowledge of the topics listed in the weekly content below.
 - Ability to understand the differences of a program file, an object file, and a source file
 - Ability to use git and similar distributed version control mechanisms
 - Ability to use GDB, Valgrind and similar debug tools for system programs
@@ -52,6 +56,8 @@ Knowledge of the topics listed in the weekly content below.
 - For C programming, you can refer to "The C Programming Language", by Brian W. Kernighan, Dennis M. Ritchie.
   
 ## Weekly Content (you might see slight changes during the semester.)
+
+* for pdf (converted from  google slides), see [lectures](lectures)
 1. Course administrivia,  crash course on C, compiler steps, object files
 2. Macros, Makefiles, Gdb, Version Control (Git)
 3. Review of  pointers, pointer arithmetic, function pointers
@@ -79,7 +85,7 @@ Knowledge of the topics listed in the weekly content below.
 - Submissions through https://classroom.google.com/    & https://classroom.github.com/ 
 - No late submission
 ## Grading 
-- 10% quizzes (given every week, 1 lowest quiz is not included)
+- 10% labs/quizzes (given every week, 1 lowest  is not included)
 - 20% midterm
 - 30% 3-4 programming assignments including a group project
 - 40%  final exam
@@ -92,24 +98,30 @@ Knowledge of the topics listed in the weekly content below.
 - Post something when you would like to help others with something.
 
 ## Environment Settings
-- You should have Linux or Unix installed on a machine/virtual-machine. 
+- You should have Linux (any distro) or Unix (BSD, macOS) installed on a machine/virtual-machine. 
 
 In Windows,
 - you can try many linux-distros through Windows subsytem for Linux https://learn.microsoft.com/en-us/windows/wsl/
   - remember to install build-essential package
 - For GUI, https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps 
-or you can install Linux through a virtual-machine software such as VirtualBox 
-(https://www.virtualbox.org/ ).  
+
+Or you can install Linux through a virtual-machine software 
+- e.g. VirtualBox https://www.virtualbox.org/  
 - https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox#1-overview
 - https://wiki.debian.org/VirtualBox
 - some online sites providing a linux terminal (not tested!)
-- Install Valgrind package (eg, in debian $sudo apt install valgrind) https://valgrind.org/docs/manual/quick-start.html 
-- Open a github account (If you do not have one)
+- For mac M chips use https://mac.getutm.app/ 
+
+### Install Valgrind package 
+  - eg, in debian $sudo apt install valgrind
+  -  https://valgrind.org/docs/manual/quick-start.html 
+
+### Open a github account (If you do not have one)
 - you can use your ####@imu.edu.tr, and get a free account https://docs.github.com/en/get-started/start-your-journey/about-github-and-git
 - git reference: https://git-scm.com/docs 
 
 ## For discussions,
-- https://piazza.com/istanbul_medeniyet_university/spring2024/bil222 
+- https://piazza.com/istanbul_medeniyet_university/spring2025/bil222 
   - The code is given in the classroom.
 
 ## Collaboration and Cheating Policy
