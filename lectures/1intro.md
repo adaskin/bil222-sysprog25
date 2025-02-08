@@ -2,21 +2,7 @@
 title: "System Programming - Introduction"
 author: "Ammar Daskin"
 institute: "Istanbul Medeniyet University, Computer Engineering Department"
-urlcolor: red
-linkstyle: bold
-aspectratio: 169
 theme: black
-transition: slide
-controls: true
-controlsTutorial: true
-slideNumber: true
-hash: true
-center: false
-align-items: left
-align-content: left
-justify-content: left
-lang: tr
-output: revealjs::revealjs_presentation
 ---
 <style type="text/css">
 div {
@@ -28,13 +14,15 @@ div {
 **Instructor: Ammar Daskin**  
 **📍 Classroom: B517**  
 
+
 ---
 
 ## 🕒 Course Hours  
-- **Friday @ 2:30 PM**:  
-  - Slides & examples posted on **Google Classroom**.  
-- **Thursday @ 3:30 PM**:  
-  - Homework/Quizzes via **GitHub** or in-class tools.  
+- **Lectures: Thursday @ 8:30 AM**:  
+  - Slides & examples posted on **canvas**.  
+- **Labs: Wednesdays**:  
+  - B-Computer Labs
+  - Labs/Quizzes via **GitHub** or in-class tools.  
 
 ---
 
@@ -42,7 +30,7 @@ div {
 - **Mandatory**: Passing grade in **BIL 121 (C Programming)**.  
 - **Recommended Knowledge**:  
   - Basic data structures & algorithms  
-  - Computer architecture fundamentals  
+  - Computer architecture basic fundamentals (BIl 111)  
 
 ---
 
@@ -95,7 +83,7 @@ div {
 ---
 
 ## 💻 What is System Programming?  
-> "Low-level software that interfaces directly with the OS kernel."  
+> "Low-level software that interfaces directly with the OS kernel: It uses core system libraries."  
 
 **Examples**:  
 - Text editors (`vim`, `emacs`)  
@@ -106,18 +94,30 @@ div {
 
 ## 🌟 Why Learn System Programming?  
 - Write **efficient low-level code** (e.g., OS components).  
-- Optimize high-level applications with kernel insights.  
+- Optimize high-level applications with kernel/low-level insights.  
 
 ---
 
-## 🐧 Linux System Programming  
+## 🐧 Unix System Programming  
 **Key Components**:  
 ```plaintext
 User Program → System Call → Kernel → Hardware
 ```  
 **Tools**:  
 - `gcc` compiler  
-- System calls for I/O, process control, and memory management.  
+- System calls for I/O, process control, and memory management. 
+  - > provided by the kernel API.
+
+---
+
+## 📲 Protability of programs
+
+**API:**
+- Application programming interface: source code level  
+
+**ABI:**
+- Application binary interface: compiled program interface
+- the same function on any system with the same ABI  
 
 ---
 
@@ -138,14 +138,14 @@ User Program → System Call → Kernel → Hardware
 8. ☠️ Deadlock  
 9. 🌐 Virtual Memory & IPC  
 10. ⏳ Scheduling  
-11. 🌍 Networking/Sockets  
-12. 📂 Filesystems  
-13. 📡 Signals  
+11. 📡 Signals 
+12. 🌍 Networking/Sockets  
+13. 📂 Filesystems  
 14. 🎓 Final Review  
-
+  
 ---
 
-## 🌿 Git Essentials  
+## 🌿 Git Essentials (live demo)  
 **Workflow**:  
 ```bash
 # Initialize & commit
@@ -159,6 +159,7 @@ git push -u origin main
 ```
 
 **Pro Tip**: Use [SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for secure authentication! 🔑  
+Use [GPG keys](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account) to sign your commits 
 
 ---
 
@@ -216,6 +217,20 @@ int main() {
 $ gcc main.c & ./a.out
 ```
 
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+    <div style="background: #4b8bbe; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+        Source Files<br>(.c, .h, .o, etc)
+    </div>  
+  <div style="font-size: 24px;color:blue;">→</div>
+    <div style="background: #73c48f; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+        GCC<br>Compiler
+    </div>
+    <div style="font-size: 24px;color:blue;">→</div>
+    <div style="background: #4b8bbe; color: white; padding: 15px; border-radius: 5px; text-align: center;">
+        Executable<br>(a.out)
+    </div>
+</div>
+
 ---
 
 ## ⚙️ Compilation  Steps    
@@ -231,6 +246,7 @@ Hello World! 👋
 ```
 
 ---
+
 
 ### 🔧 GCC Compilation Deep Dive: From Source to Executable  
 
@@ -283,7 +299,7 @@ $ nm main                 # Dynamic linking resolves this later!
 | **📦 Size Impact**    | Bloats executable              | Zero executable bloat           |
 | **⏳ Loading**        | Embedded at compile-time       | Loaded dynamically at runtime   |
 | **💡 Memory Usage**   | Per-process copy (wasteful)    | Single system-wide instance     |
-| **🛠️ Linking**       | Static linker (compile-time)   | Dynamic linker (runtime)        |
+| **📎 Linking**       | Static linker (compile-time)   | Dynamic linker (runtime)        |
 
 **Example**:  
 - Static: `libmath.a` → Compiled into your binary.  
@@ -343,5 +359,5 @@ clean:
 ---
 
 ## ➡️ Next Lecture Preview  
-- Deep dive into **C pointers** 🎯.  
+- Deep dive into **C pointers, structs...** 🎯.  
 - Structs, memory alignment, and optimization.  
