@@ -216,20 +216,10 @@ int main() {
 }
 $ gcc main.c & ./a.out
 ```
+```Plaintext
+ Source(.c, .h, .o, etc) → GCC → Executable(a.out)
+``` 
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
-    <div style="background: #4b8bbe; color: white; padding: 15px; border-radius: 5px; text-align: center;">
-        Source Files<br>(.c, .h, .o, etc)
-    </div>  
-  <div style="font-size: 24px;color:blue;">→</div>
-    <div style="background: #73c48f; color: white; padding: 15px; border-radius: 5px; text-align: center;">
-        GCC<br>Compiler
-    </div>
-    <div style="font-size: 24px;color:blue;">→</div>
-    <div style="background: #4b8bbe; color: white; padding: 15px; border-radius: 5px; text-align: center;">
-        Executable<br>(a.out)
-    </div>
-</div>
 
 ---
 
