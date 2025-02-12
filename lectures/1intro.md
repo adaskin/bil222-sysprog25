@@ -128,8 +128,8 @@ User Program → System Call → Kernel → Hardware
 ---
 
 ## 📅 Weekly Topics  
-1. 🛠️ Git, GCC, GDB, C Crash Course  
-2. 🧠 Pointers, Memory Model, Makefiles  
+1. 🛠️ Git, GCC, Makefiles, C Crash Course  
+2. 🧠 Pointers, Memory Model, GDB, Valgrind  
 3. 🔄 Processes  
 4. 💾 Memory Allocators  
 5. 🧵 Threads  
@@ -142,8 +142,66 @@ User Program → System Call → Kernel → Hardware
 12. 🌍 Networking/Sockets  
 13. 📂 Filesystems  
 14. 🎓 Final Review  
-  
+
 ---
+
+## This week topics
+- Version Control Basics
+- Git Fundamentals
+- Crash course on C
+  - Program files
+  - Makefile Essentials
+
+---
+
+## What is Version Control?
+A system to:
+- Track changes to code/files over time
+- Collaborate without overwriting work
+- Revert to previous states
+
+**Key Terms**:
+- Repository: Database of project history
+- Commit: Snapshot of changes
+- Branch: Parallel development line
+- Merge: Combine changes from branches
+
+---
+
+## Git Basics
+**Distributed Version Control**:
+- Local + remote repositories (e.g., GitHub)
+- Every clone has full history
+
+**Essential Commands**:
+```bash
+git init        # Create new repo
+git add [file]  # Stage changes
+git commit -m "message" # Save snapshot
+git branch      # List/create branches
+git checkout    # Switch branches
+git merge       # Combine branches
+git push/pull   # Sync with remote
+```
+
+---
+
+## Typical Git Workflow
+```
+          commit
+Work Dir ----> Staging Area ----> Repository
+             (git add)         (git commit)
+```
+
+**Branching Model**:
+```
+main ────┐
+          ├─ merge ──> deploy
+dev  ────┘
+```
+
+---
+
 
 ## 🌿 Git Essentials (live demo)  
 **Workflow**:  
@@ -189,8 +247,8 @@ You have pushed the changes to remote repo on github.com and submitted your assi
 
 ---
 
-# Crash course on C
-C-examples done in class are posted on canvas..
+# Crash course on C and development tools
+C-examples done in class are posted in lecture notes...
 
 ---
 
@@ -208,7 +266,7 @@ program is loaded into memory.
 
 ### Example with C
 ```C
-$ cat main.c
+$ cat > main.c
 #include <stdio.h>
 int main() {
     printf("Hello World!\n");
@@ -274,7 +332,7 @@ $ nm main                 # Dynamic linking resolves this later!
    ```plaintext
    _start → init() → main() → exit()
    ```  
-4. **Runtime Linker**: Use `ldd` to check shared libs:  
+4. **Runtime Linker**: Use `ldd` or `otool -L` to check shared libs:  
    ```bash
    $ ldd a.out  # Show library dependencies
    ```
@@ -298,6 +356,44 @@ $ nm main                 # Dynamic linking resolves this later!
 ---
 
 # 🛠️ Makefiles 101  
+**Automate build processes**:
+- Define tasks/rules
+- Manage dependencies
+- Avoid repetitive commands  
+
+---
+
+**Basic Syntax**:
+```makefile
+target: dependencies
+    commands
+```
+
+**Example**:
+```makefile
+build: main.c utils.c
+    gcc -o program main.c utils.c
+
+clean:
+    rm -f program *.o
+```
+
+---
+
+## Why Use Makefiles?
+1. **Automation**: Single command to build/test
+2. **Efficiency**: Only rebuild changed components
+3. **Standardization**: Consistent process for all users
+4. **Flexibility**: Chain tasks (build → test → deploy)
+
+Run with:
+```bash
+make build
+make clean
+```
+
+---
+
 ### Automate Your Builds 🤖  
 
 ```makefile
@@ -324,6 +420,7 @@ clean:
 - [GNU Make Manual](https://www.gnu.org/software/make/manual/make.html) 📚  
 
 ---
+
 
 ## Beyond Make: Build System Alternatives  
 ### Choose Your Weapon ⚔️  
