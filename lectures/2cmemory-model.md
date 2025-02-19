@@ -318,7 +318,7 @@ struct foo1 {
 
 #### Padding to Meet Alignment  
 ```c
-struct Unoptimized {
+struct unoptimized {
     char c;    // 1 byte
     int x;     // 4 bytes (needs 3-byte padding after c)
 };
@@ -327,7 +327,7 @@ struct Unoptimized {
 
 Optimized by reordering:  
 ```c
-struct Optimized {
+struct optimized {
     int x;     // 4 bytes
     char c;    // 1 byte (no trailing padding needed)
 };
