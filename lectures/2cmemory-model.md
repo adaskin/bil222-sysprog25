@@ -20,8 +20,7 @@ div {
     - Common Bugs & Debugging Techniques
 
   - **Resources**:
-    - [https://github.com/angrave/SystemProgramming/wiki](https://github.com/angrave/SystemProgrammin
-      g/wiki)
+    - [https://github.com/angrave/SystemProgramming/wiki](https://github.com/angrave/SystemProgramming/wiki)
     - [GCC Documentation](https://gcc.gnu.org/onlinedocs/)
     - [Structure Packing Guide](http://www.catb.org/esr/structure-packing/)
     - Edited with DeepSeek-r1
