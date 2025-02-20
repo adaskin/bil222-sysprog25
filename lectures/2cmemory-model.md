@@ -317,7 +317,7 @@ struct foo1 {
 
 #### Padding to Meet Alignment  
 ```c
-struct unoptimized {
+struct Unoptimized {
     char c;    // 1 byte
     int x;     // 4 bytes (needs 3-byte padding after c)
 };
@@ -326,7 +326,7 @@ struct unoptimized {
 
 Optimized by reordering:  
 ```c
-struct optimized {
+struct Optimized {
     int x;     // 4 bytes
     char c;    // 1 byte (no trailing padding needed)
 };
@@ -431,25 +431,51 @@ Read a bmp file and put a frame around the image
 
 ---
 
-#### Bitmap File Structure (BMP)  
+#### Bitmap File Structure (BMP)
+[see wikipedia](https://en.wikipedia.org/wiki/BMP_file_format)
 1. **BMP Header**:  
    - File type (`BM`), size, offset to pixel data.  
 2. **DIB Header**:  
    - Width, height, bits per pixel (e.g., 32-bit ARGB).  
 3. **Pixel Data**:  
    - Stored as BGRX (little-endian, 4 bytes per pixel).  
+  
+---
+
 
 Example code to read headers:  
 ```c
 FILE *f = fopen("image.bmp", "rb");
-uint32_t offset, width, height;
-fseek(f, 10, SEEK_SET); // Skip 10 bytes
-fread(&offset, 4, 1, f); // Read pixel data offset
-fread(&width, 4, 1, f);  // Image width
-fread(&height, 4, 1, f); // Image height
+uint32_t offset, hsize, width, height;
+uint16_t nplanes, nbits;
+fseek(f, 10, SEEK_CUR);  /* skip 10 bytes   */
+fread(&offset, 4, 1, f); /* data offset     */
+fread(&hsize, 4, 1, f);  /* DIP header size */
+fread(&width, 4, 1, f);
+fread(&height, 4, 1, f);
+fread(&nplanes, 2, 1, f);
+fread(&nbits, 2, 1, f);
+printf("offset: %d, hsize: %d, \n"
+  "width: %d, height: %d, nplanes: %d, bits: %d",
+  offset, hsize, width, height, nplanes, nbits);
+fclose(f);
 ```
 
 ---
+
+### Copying an image header
+
+```C
+/*storage for the data upto offset of image data*/
+uint32_t *fheader = (uint32_t *) malloc(sizeof(uint8_t)*offset);
+
+/*rewind to the beginning*/
+rewind(infile);
+
+/*read and write the header upto offset*/
+fread(fheader, 1, offset, infile);
+fwrite(fheader, 1, offset, outfile);
+```
 
 #### Pixel Manipulation  
 - **BGRX Format**:  
@@ -464,20 +490,27 @@ fread(&height, 4, 1, f); // Image height
       } __attribute__((packed));
   } Pixel;
   ```
-- **Example**: Add a red frame:  
-  ```c
-  Pixel p;
-  uint32_t FRAME_COLOR = 0x000000FF; // Blue=0, Green=0, Red=255, Alpha=0
-  for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-          fread(&p.pixel, 4, 1, infile);
-          if (j < 50 || i < 50 || i > height-50 || j > width-50) 
-              fwrite(&FRAME_COLOR, 4, 1, outfile);
-          else 
-              fwrite(&p.pixel, 4, 1, outfile);
-      }
-  }
-  ```
+
+---
+
+- **Example**: Add a frame:  
+```c
+Pixel p;
+uint32_t FRAME_COLOR = 0x000000FF; /*a=0, r=0, g=0, b=FF*/
+//uint32_t FRAME_COLOR = 255<<16 | 255<<8 | 255; /*(little endian)*/
+
+rewind(infile);
+fseek(infile,offset,SEEK_CUR);/*go to image data*/
+for (int i = 0; i < height; i++) {
+    for (int j = 0; j < width; j++) {
+      fread(&p.pixel, 4, 1, infile);
+      if (j < 50 || i < 50 || i > height-50 || j > width-50) 
+        fwrite(&FRAME_COLOR, 4, 1, outfile);
+      else 
+        fwrite(&p.pixel, 4, 1, outfile);
+    }
+}
+```
 
 ---
 
