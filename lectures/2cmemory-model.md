@@ -6,7 +6,7 @@ theme: black
 
 <style type="text/css">
 div {
-  font-size: clamp(16px, 3vw, 32px);
+  font-size: clamp(10px, 3vw, 32px);
 }
 </style>
 
@@ -317,7 +317,7 @@ struct foo1 {
 
 #### Padding to Meet Alignment  
 ```c
-struct Unoptimized {
+struct unoptimized {
     char c;    // 1 byte
     int x;     // 4 bytes (needs 3-byte padding after c)
 };
@@ -326,7 +326,7 @@ struct Unoptimized {
 
 Optimized by reordering:  
 ```c
-struct Optimized {
+struct optimized {
     int x;     // 4 bytes
     char c;    // 1 byte (no trailing padding needed)
 };
@@ -439,11 +439,12 @@ Read a bmp file and put a frame around the image
    - Width, height, bits per pixel (e.g., 32-bit ARGB).  
 3. **Pixel Data**:  
    - Stored as BGRX (little-endian, 4 bytes per pixel).  
-  
+
+
 ---
 
-
 Example code to read headers:  
+
 ```c
 FILE *f = fopen("image.bmp", "rb");
 uint32_t offset, hsize, width, height;
@@ -476,6 +477,8 @@ rewind(infile);
 fread(fheader, 1, offset, infile);
 fwrite(fheader, 1, offset, outfile);
 ```
+
+---
 
 #### Pixel Manipulation  
 - **BGRX Format**:  
@@ -544,6 +547,8 @@ for (int i = 0; i < height; i++) {
 - **`errno`**: Global variable set by system calls/library functions to indicate errors.  
 - **`strerror(errno)`**: Converts `errno` to a human-readable string.  
 - **`perror("message")`**: Prints `message: error_string` to `stderr`.  
+
+---
 
 Example:  
 ```c
@@ -707,9 +712,11 @@ $1 = 42
   mov $msg, %rsi  // Buffer
   mov $12, %rdx   // Length
   syscall
-  ```
+  ```  
+
 
 ---
+
 #### Transition to Kernel Mode  
 - **System Calls**: Triggered via software interrupts (e.g., `int 0x80` on x86, `syscall` on x86-64).  
 - **Privileged Operations**: File I/O, process creation, memory allocation.  
