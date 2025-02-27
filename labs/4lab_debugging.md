@@ -196,7 +196,7 @@ Find a publicly available program and analyze it by using valgrind (you can ask 
 
 ---
 
-## Part 3: Memory Analysis of Lab-2
+## Part 3: Memory Analysis of Lab-3
 Run valgrind on the code of lab-2 to determine if there is any memory leak.
 
 
