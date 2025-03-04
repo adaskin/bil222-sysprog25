@@ -2,7 +2,6 @@
 title: "System Programming - Introduction"
 author: "Ammar Daskin"
 institute: "Istanbul Medeniyet University, Computer Engineering Department"
-theme: black
 ---
 <style type="text/css">
 div {

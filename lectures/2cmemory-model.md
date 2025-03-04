@@ -1,7 +1,6 @@
 ---
 title: "System Programming - C memory model"
 author: "Ammar Daskin"
-theme: black
 ---
 
 <style type="text/css">
