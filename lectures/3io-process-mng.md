@@ -1,7 +1,6 @@
 ---
 title: "file i/o-process management"
 author: "Ammar Daskin"
-theme: black
 ---
 
 <style type="text/css">
@@ -187,6 +186,8 @@ User App → `open()` → Syscall Interface → Kernel `sys_open()`
 - APIs abstract syscall details.
 - Syscalls are OS-specific and privileged.
 
+---
+
 ![alt text](images/3syscall-os.png)
 *Diagram Source: Operating System Concepts, 10th Edition*
 
@@ -333,6 +334,8 @@ read(fd, &c, 1); // Read 1 byte from file.txt
    - Contains metadata: file position, access mode, etc.
 3. **Inode Table** (File-Specific):
    - Stores file metadata (size, permissions, disk location).
+
+---
 
 ![alt text](images/3fds.png)
 [https://en.wikipedia.org/wiki/File_descriptor](https://en.wikipedia.org/wiki/File_descriptor)
