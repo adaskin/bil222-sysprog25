@@ -1,12 +1,20 @@
 ---
+
 title: "file i/o-process management"
 author: "Ammar Daskin"
-
+marp: true
+size: 16:10
+paginate: true
+theme: enable-all-auto-scaling
+auto-scaling: true
 ---
+
+<!-- theme: default -->
+<!-- class: invert -->
 
 <style type="text/css">
 div {
-  font-size: clamp(10px, 3vw, 32px);
+  font-size: clamp(10px, 3vw, 28px);
 }
 </style>
 
@@ -17,6 +25,7 @@ div {
 - **Process Creation & Termination**
 - **Example Shell Implementation**
 
+*slides are edited with DeepSeek*
 
 ---
 
@@ -34,7 +43,7 @@ A **system call** is a request made by an active process **(through traps or sof
 
 ---
 
-## Why Do We Need a System Call?
+### Why Do We Need a System Call?
 
 **User Mode** → **Kernel Mode Transition**:
 1. User process issues a system call (e.g., `open()`).
@@ -49,7 +58,7 @@ User Process → System Call → Kernel Mode (Privileged) → Return to User Mod
 
 ---
 
-## Transition to Kernel Mode
+### Transition to Kernel Mode
 
 Different CPU architectures use specific instructions to trigger kernel mode:
 
@@ -64,7 +73,7 @@ Different CPU architectures use specific instructions to trigger kernel mode:
 
 ---
 
-## System Call Example: Writing "Hello World" (x86-32 Assembly)
+### System Call Example: Writing "Hello World" (x86-32 Assembly)
 
 **C Code**:
 ```c
@@ -74,6 +83,8 @@ int main() {
     _exit(0); // Exit with code 0
 }
 ```
+---
+
 
 **x86-32 Assembly**:
 ```assembly
@@ -93,7 +104,7 @@ _start:
 
 ---
 
-## System Call Example: Writing "Hello World" (x86-64 Assembly)
+### System Call Example: Writing "Hello World" (x86-64 Assembly)
 
 **C Code** (same as x86-32):
 ```c
@@ -111,7 +122,6 @@ _start:
     movq $msg, %rsi  ; Message address
     movq $12, %rdx   ; Message length
     syscall          ; Trigger syscall
-
     movq $60, %rax   ; Syscall #60 (_exit)
     movq $0, %rdi    ; Exit code 0
     syscall          ; Trigger syscall
@@ -120,7 +130,7 @@ _start:
 
 ---
 
-## Direct System Calls Using `syscall()`
+### Direct System Calls Using `syscall()`
 - Without Wrapper Functions
 
 The `syscall()` function allows invoking system calls directly by their numeric ID.
@@ -146,7 +156,7 @@ int main() {
 
 ---
 
-## Using `syscall()` for `sys_write`
+### Using `syscall()` for `sys_write`
 
 **Kernel Definition**:
 ```c
@@ -169,7 +179,7 @@ int main() {
 
 ---
 
-## API, System Calls, and OS Relationship
+### API, System Calls, and OS Relationship
 
 **Layers**:
 1. **User Application**: Calls high-level API functions (e.g., `open()`).
@@ -194,7 +204,7 @@ User App → `open()` → Syscall Interface → Kernel `sys_open()`
 
 ---
 
-## `dup2()` System Call Implementation (x86)
+### `dup2()` System Call Implementation (x86)
 
 **System Call Workflow**:
 1. **Setup Parameters**: Load syscall number and arguments into registers.
@@ -225,7 +235,7 @@ ENTRY(entry_INT80_32)
 
 ---
 
-## Interrupts: Software vs Hardware
+### Interrupts: Software vs Hardware
 
 | **Type**              | **Description**                                                                 | **Examples**                     |
 |-----------------------|---------------------------------------------------------------------------------|-----------------------------------|
@@ -238,7 +248,7 @@ ENTRY(entry_INT80_32)
 
 ---
 
-## Traps vs Exceptions vs Interrupts
+### Traps vs Exceptions vs Interrupts
 
 | **Term**       | **Description**                                                                 | **Examples**                     |
 |----------------|---------------------------------------------------------------------------------|-----------------------------------|
@@ -255,7 +265,7 @@ ENTRY(entry_INT80_32)
 
 ---
 
-## System Call Summary
+### System Call Summary
 
 **How Syscalls Work**:
 1. User process prepares syscall arguments.
@@ -285,7 +295,9 @@ ENTRY(entry_INT80_32)
 **Key Differences**:
 - `open()` (Section 2): Direct syscall for file operations.
 - `printf()` (Section 3): Library function that may use `write()` internally.
-- 
+
+---
+
 **Example**:
 ```c
 #include <fcntl.h>
@@ -302,7 +314,7 @@ All I/O operations in POSIX systems follow a unified model:
 
 ---
 
-## File Descriptors
+### File Descriptors
 
 - **Definition**: Integer identifiers (0 to max limit) representing open files/devices.
 - **Standard FDs**:
@@ -325,7 +337,7 @@ read(fd, &c, 1); // Read 1 byte from file.txt
 
 ---
 
-## File Descriptor Internals
+### File Descriptor Internals
 
 **Three-Level Structure**:
 1. **File Descriptors** (Process-Specific):
@@ -359,7 +371,7 @@ FD 1 → File Table Entry B → Inode (stdout)
 ---
 
 
-## Advanced File Descriptor Concepts
+### Advanced File Descriptor Concepts
 
 **Key Points**:
 1. **Everything is a File**:
@@ -372,6 +384,8 @@ FD 1 → File Table Entry B → Inode (stdout)
 4. **Position Tracking**:
    - For seekable streams, the OS tracks read/write offsets.
 
+---
+
 **Example**:
 ```c
 lseek(fd, 0, SEEK_SET); // Reset file offset to start
@@ -379,7 +393,7 @@ lseek(fd, 0, SEEK_SET); // Reset file offset to start
 
 ---
 
-## `open()` System Call: File Access Flags & Modes
+### `open()` System Call: File Access Flags & Modes
 
 **Syntax**:
 ```c
@@ -387,6 +401,8 @@ lseek(fd, 0, SEEK_SET); // Reset file offset to start
 int open(const char *path, int oflags);          // Without O_CREAT
 int open(const char *path, int oflags, mode_t mode); // With O_CREAT
 ```
+
+---
 
 **Flags**:
 | Flag       | Description                                      |
@@ -417,7 +433,7 @@ int open(const char *path, int oflags, mode_t mode); // With O_CREAT
 ---
 
 
-## Example: Opening a File with `open()`
+### Example: Opening a File with `open()`
 
 **Code**:
 ```c
@@ -436,6 +452,8 @@ int main() {
 }
 ```
 
+---
+
 **Notes**:
 - `O_CREAT` requires the third argument (`mode`).
 - Use bitwise OR (`|`) to combine flags.
@@ -443,7 +461,7 @@ int main() {
 ---
 
 
-## `fopen()` vs `open()`
+### `fopen()` vs `open()`
 
 | **`fopen()` (C Library)**       | **`open()` (System Call)**         |
 |---------------------------------|------------------------------------|
@@ -469,12 +487,12 @@ int fd = open("afile.txt", O_RDWR); // Low-level access
 FILE *file = fopen("afile.txt", "r+"); // Buffered stream
 ```
 
-[(https://man7.org/linux/man-pages/man3/fopen.3.html](https://man7.org/linux/man-pages/man3/fopen.3.html)
+[https://man7.org/linux/man-pages/man3/fopen.3.html](https://man7.org/linux/man-pages/man3/fopen.3.html)
 
 ---
 
 
-## `read()` System Call
+### `read()` System Call
 
 **Syntax**:
 ```c
@@ -525,7 +543,7 @@ int main() {
 ---
 
 
-## Example: Reading a File with `read()`
+### Example: Reading a File with `read()`
 
 **Code**:
 ```c
@@ -570,7 +588,7 @@ int main() {
 
 ---
 
-## `write()` System Call
+### `write()` System Call
 
 **Syntax**:
 ```c
@@ -590,7 +608,7 @@ ssize_t write(int fd, const void *buf, size_t len);
 
 ---
 
-## Example: Writing to a File with `write()`
+### Example: Writing to a File with `write()`
 
 **Code**:
 ```c
@@ -631,7 +649,7 @@ int main() {
 
 ---
 
-## Retrieving File Metadata: `stat`, `fstat`, `lstat`
+### Retrieving File Metadata: `stat`, `fstat`, `lstat`
 
 **Functions**:
 ```c
@@ -651,7 +669,7 @@ int lstat(const char *path, struct stat *statbuf); // Does not follow symlinks
 
 ---
 
-## The `struct stat` and Example Usage
+### The `struct stat` and Example Usage
 
 **Structure Definition**:
 ```c
@@ -700,7 +718,7 @@ int main() {
 
 ---
 
-## Repositioning File Offset with `lseek()`
+### Repositioning File Offset with `lseek()`
 
 **Syntax**:
 ```c
@@ -787,11 +805,11 @@ int main() {
 
 ---
 
-# Process Management
+## Process Management
 
 ---
 
-## Programs and Processes
+### Programs and Processes
 
 **Program**:
 - A static binary file describing how to create a process.
@@ -819,9 +837,7 @@ int main() {
 ---
 
 
-## Process Memory Segments
-
-A process contains the following isolated components:
+### Process Memory Segments
 
 | **Segment**       | **Description**                                                                 |
 |--------------------|---------------------------------------------------------------------------------|
@@ -833,7 +849,7 @@ A process contains the following isolated components:
 
 ---
 
-## Code Example: Process Memory Layout
+### Code Example: Process Memory Layout
 
 ```c
 /*taken from the book linux programming interface*/
@@ -887,7 +903,7 @@ int main(int argc, char *argv[]){ /* Allocated in frame for main() */
 
 ---
 
-## Process IDs (PIDs)
+### Process IDs (PIDs)
 
 - **PID**: Unique integer identifier for each process.
 - **Key PIDs**:
@@ -903,7 +919,7 @@ int main(int argc, char *argv[]){ /* Allocated in frame for main() */
 
 ---
 
-## Retrieving the Process ID: `getpid()`
+### Retrieving the Process ID: `getpid()`
 
 **Syntax**:
 ```c
@@ -931,7 +947,7 @@ int main() {
 
 ---
 
-## Process Parent-Child Relationships
+### Process Parent-Child Relationships
 
 - **Parent Process**: Creates a new process using `fork()`.
 - **Child Process**: Inherits user/group ownership and environment from the parent.
@@ -957,7 +973,7 @@ int main() {
 
 ---
 
-## Replacing Process Image with `exec`
+### Replacing Process Image with `exec`
 
 **Purpose**: Replace the current process with a new program.  
 **Syntax**:
@@ -990,7 +1006,7 @@ int main() {
 
 ---
 
-## `exec` Function Comparison
+### `exec` Function Comparison
 
 | **Function**   | **Argument Format** | **Environment**      | **Path Search** |
 |----------------|---------------------|----------------------|-----------------|
@@ -1008,7 +1024,7 @@ int main() {
 
 ---
 
-## Example: Using `execv()` to Run Another Program
+### Example: Using `execv()` to Run Another Program
 
 **program1.c**:
 ```c
@@ -1039,6 +1055,7 @@ int main() {
     return 0;
 }
 ```
+---
 
 **Output**:
 ```
@@ -1046,15 +1063,13 @@ program2
 program1 called by execv()
 ```
 
----
-
 **Explanation**:
 - `program2` replaces itself with `program1` using `execv()`.
 - Code after `execv()` in `program2` is unreachable on success.
 
 ---
 
-## Integrating `execve()` into a Shell (Demo)
+### Integrating `execve()` into a Shell (Demo)
 
 **Steps**:
 1. Parse user input into command and arguments (e.g., `ls -l` → `["ls", "-l", NULL]`).
@@ -1070,7 +1085,7 @@ exit(1);
 
 ---
 
-## Why `exec` Alone Isn’t Enough
+### Why `exec` Alone Isn’t Enough
 
 **Problem**:
 - `exec()` replaces the current process. If a shell uses `exec()` directly, it terminates after running the command.
@@ -1097,13 +1112,14 @@ else wait(...); // Parent waits
 
 ---
 
-## Creating Processes with `fork()`
+### Creating Processes with `fork()`
 
 **Syntax**:
 ```c
 #include <unistd.h>
 pid_t fork(void); // Returns 0 to child, child’s PID to parent, -1 on error
 ```
+---
 
 **Example**:
 ```c
@@ -1162,7 +1178,7 @@ int  main(){
 ---
 
 
-## How Many Child Processes? (2 Forks)
+### How Many Child Processes? (2 Forks)
 
 **Code**:
 ```c
@@ -1195,7 +1211,7 @@ Hello from PID 126 (child 3)
 ---
 
 
-## How Many Child Processes? (4 Forks)
+### How Many Child Processes? (4 Forks)
 
 **Code**:
 ```c
@@ -1249,7 +1265,7 @@ int main() {
 
 
 
-## Modifying shell implementation with fork() (demo)
+### Modifying shell implementation with fork() (demo)
 
 **Objective**: Modify a simple shell to execute commands using `fork()` and `execve()`.
 
@@ -1280,7 +1296,7 @@ int main() {
 
 ---
 
-## Parent Process Tracking Child Status
+### Parent Process Tracking Child Status
 
 **Problem in our shell**: A parent needs to know if a child succeeded (e.g., exited with `0`) or failed.
 
@@ -1306,7 +1322,7 @@ if (WIFEXITED(status)) {
 
 ---
 
-## Waiting for Child Processes
+### Waiting for Child Processes
 
 **Purpose**: Ensure orderly cleanup of child processes and prevent zombies.
 
@@ -1320,7 +1336,7 @@ if (WIFEXITED(status)) {
 
 ---
 
-## Interpreting Child Exit Status
+### Interpreting Child Exit Status
 
 **Macros for `wait()` Status**:
 - Use `WIF..()` to determine the cause.
@@ -1350,7 +1366,7 @@ if (WIFEXITED(status)) {
 
 ---
 
-## Example: Using `wait()` to Check Child Status
+### Example: Using `wait()` to Check Child Status
 
 **Code**:
 ```c
@@ -1381,13 +1397,15 @@ Child exit code: 1
 
 ---
 
-## Advanced Waiting with `waitpid()` and `waitid()`
+### Advanced Waiting with `waitpid()` and `waitid()`
 
 **`waitpid()` Parameters**:
 | **Parameter** | **Description**                                                                 |
 |---------------|---------------------------------------------------------------------------------|
 | `pid`         | `-1`: Any child.<br>`>0`: Specific PID.<br>`0`: Same process group.             |
 | `options`     | `WNOHANG`: Return immediately if no child exited.<br>`WUNTRACED`: Include stopped children. |
+
+---
 
 **Example**:
 ```c
@@ -1404,7 +1422,7 @@ if (child_pid > 0) {
 
 ---
 
-## Example: Non-Blocking Wait with `WNOHANG`
+### Example: Non-Blocking Wait with `WNOHANG`
 
 **Code**:
 ```c
@@ -1442,7 +1460,7 @@ Child exited with code 1
 
 ---
 
-## A Fun Exercise: Sleep Sort Algorithm
+#/3# A Fun Exercise: Sleep Sort Algorithm
 
 **Concept**: Use `fork()` and `sleep()` to sort numbers.
 
@@ -1471,7 +1489,7 @@ int main(int argc, char *argv[]) {
 
 ---
 
-## Example: Running `/bin/ls` in a Child Process
+### Example: Running `/bin/ls` in a Child Process
 
 **Code**:
 ```c
@@ -1495,7 +1513,7 @@ int main() {
 
 ---
 
-## Example: Handling `exec()` Failures
+### Example: Handling `exec()` Failures
 
 **Code**:
 ```c
@@ -1531,7 +1549,7 @@ int main() {
 
 ---
 
-## Shared File Descriptors in Parent and Child
+### Shared File Descriptors in Parent and Child
 
 **Key Point**: After `fork()`, parent and child share the same file descriptor table entries.
 
@@ -1564,7 +1582,7 @@ Parent: 2....line
 
 ---
 
-## Independent File Descriptors
+### Independent File Descriptors
 
 **Scenario**: Each process opens the file **after** `fork()`.
 
@@ -1594,7 +1612,7 @@ Parent: 1....line
 
 ---
 
-## Shared vs Independent File Descriptors
+### Shared vs Independent File Descriptors
 
 **Shared FD (After `fork()`)**:
 - Parent and child share the same file offset.
@@ -1624,7 +1642,7 @@ Both read "1....line" (bytes 0–9).
 
 ---
 
-## Shell Redirection and Pipes (Demo)
+### Shell Redirection and Pipes (Demo)
 
 **Objective**: Modify the shell to support I/O redirection (e.g., `ls > output.txt`).
 
@@ -1643,7 +1661,7 @@ ls -l | grep ".txt" > output.txt
 
 ---
 
-## Zombie Processes
+### Zombie Processes
 
 **Definition**: A terminated child process that remains in the kernel process table until the parent calls `wait()`.
 
@@ -1659,7 +1677,7 @@ ls -l | grep ".txt" > output.txt
 
 ---
 
-## Orphan Processes
+### Orphan Processes
 
 **Definition**: A child process whose parent has terminated.
 
@@ -1684,7 +1702,7 @@ Orphan PID: 1234, New PPID: 1
 
 ---
 
-## Why Use Multiple Processes?
+### Why Use Multiple Processes?
 
 **Advantages**:
 - **Isolation**: Processes don’t share memory (safer than threads).
