@@ -2,10 +2,15 @@
 title: "System Programming - Introduction"
 author: "Ammar Daskin"
 institute: "Istanbul Medeniyet University, Computer Engineering Department"
+marp: true
+paginate: true
+size: 16:10
+theme: default
+class: invert
 ---
 <style type="text/css">
 div {
-  font-size: clamp(16px, 3vw, 32px);
+  font-size: clamp(10px, 2vw, 32px);
 }
 </style>
 

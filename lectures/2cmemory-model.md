@@ -1,6 +1,11 @@
 ---
 title: "System Programming - C memory model"
 author: "Ammar Daskin"
+marp: true
+paginate: true
+size: 16:10
+theme: default
+class: invert
 ---
 
 <style type="text/css">
@@ -9,7 +14,7 @@ div {
 }
 </style>
 
-### C programming, memory model and more
+# C programming, memory model and more
     - Preprocessor Directives & Macro Pitfalls
     - Pointer Arithmetic & Function Pointers
     - Memory Alignment & Struct Packing

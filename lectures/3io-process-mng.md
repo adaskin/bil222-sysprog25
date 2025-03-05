@@ -1,20 +1,22 @@
 ---
-
 title: "file i/o-process management"
 author: "Ammar Daskin"
 marp: true
-size: 16:10
 paginate: true
-theme: enable-all-auto-scaling
-auto-scaling: true
+size: 16:10
+theme: default
+class: invert
 ---
-
-<!-- theme: default -->
-<!-- class: invert -->
 
 <style type="text/css">
 div {
-  font-size: clamp(10px, 3vw, 28px);
+  font-size: clamp(10px, 2vw, 28px);
+  text-align: left;
+}
+img{ 
+  display: block;
+  width: 70%;
+  text-align: center;
 }
 </style>
 
@@ -99,7 +101,6 @@ _start:
     movl $0, %ebx    ; Exit code 0
     int $0x80         ; Trigger syscall
 ```
-
 [https://en.wikipedia.org/wiki/X86_Assembly/Interfacing_with_Linux](https://en.wikipedia.org/wiki/X86_Assembly/Interfacing_with_Linux)
 
 ---
@@ -107,13 +108,7 @@ _start:
 ### System Call Example: Writing "Hello World" (x86-64 Assembly)
 
 **C Code** (same as x86-32):
-```c
-#include <unistd.h>
-int main() {
-    write(1, "Hello World\n", 12);
-    _exit(0);
-}
-```
+
 **x86-64 Assembly**:
 ```assembly
 _start:
@@ -256,11 +251,13 @@ ENTRY(entry_INT80_32)
 | **Exception**  | Unexpected error during instruction execution (synchronous).                   | Division by zero, page fault     |
 | **Interrupt**  | External event from hardware or software (asynchronous).                       | Keyboard press, timer interrupt  |
 
+---
+
 **Notes**:
 - **Hardware Interrupts**: External (e.g., device signals).
 - **Software Interrupts**: Triggered by programs (e.g., `int 0x80`).
 
-[https://stackoverflow.com/questions/3149175](https://stackoverflow.com/questions/3149175/)
+see also [https://stackoverflow.com/questions/3149175](https://stackoverflow.com/questions/3149175/)
 
 
 ---
@@ -386,7 +383,7 @@ FD 1 → File Table Entry B → Inode (stdout)
 
 ---
 
-**Example**:
+**Example Positioning**:
 ```c
 lseek(fd, 0, SEEK_SET); // Reset file offset to start
 ```
@@ -725,8 +722,6 @@ int main() {
 #include <unistd.h>
 off_t lseek(int fd, off_t offset, int whence);
 ```
-
-**Parameters**:
 - `fd`: File descriptor.
 - `offset`: Byte offset relative to `whence`.
 - `whence`: Reference point for the offset:
@@ -750,26 +745,29 @@ lseek(fd, -10, SEEK_END); // Move 10 bytes before EOF
 
 ---
 
-## Shell Implementation: Introduction
+## A Motivating Example: Shell Implementation  
 
 **Objective**: Build a simple shell to execute commands (e.g., `ls`, `grep`).
+
+---
 
 **Key Concepts**:
 - **Process creation**: `fork()`, `exec()`.
 - **Pipes**: Redirecting I/O between processes.
-- **String parsing**: Tokenizing user input (e.g., `strtok()`).
+- **String parsing**: Tokenizing user input (e.g., `strtok_r()`, `strsep()`).
 
 **Resources**:
 - [Command Line Basics (Ubuntu Tutorial)](https://ubuntu.com/tutorials/command-line-for-beginners)
 - [`system()` Man Page](https://man7.org/linux/man-pages/man3/system.3.html)
-- [`strtok()` Guide](https://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm)
+- [`strtok_r()` Man Page](https://linux.die.net/man/3/strtok_r)
 
-*Homework tasks will extend this with pipes and process management.*
+*In homework you will extend this with pipes and process management.*
 
 ---
 
+### Using `system()` for Shell Commands
 
-## Using `system()` for Shell Commands
+---
 
 **Syntax**:
 ```c
@@ -789,6 +787,7 @@ int main() {
     return 0;
 }
 ```
+[`system()` Man Page](https://man7.org/linux/man-pages/man3/system.3.html)
 
 ---
 
@@ -801,7 +800,8 @@ int main() {
 - No direct control over I/O redirection.
 - Security risks (e.g., command injection).
 
-[https://man7.org/linux/man-pages/man3/system.3.html](https://man7.org/linux/man-pages/man3/system.3.html)
+*We will implement our shell by using a similar structure*
+
 
 ---
 
@@ -1069,7 +1069,7 @@ program1 called by execv()
 
 ---
 
-### Integrating `execve()` into a Shell (Demo)
+### Integrating `execve()` into Our Shell (Demo)
 
 **Steps**:
 1. Parse user input into command and arguments (e.g., `ls -l` → `["ls", "-l", NULL]`).
@@ -1085,10 +1085,12 @@ exit(1);
 
 ---
 
-### Why `exec` Alone Isn’t Enough
+### Why `exec` Alone Isn’t Enough for Our Shell
 
 **Problem**:
 - `exec()` replaces the current process. If a shell uses `exec()` directly, it terminates after running the command.
+
+---
 
 **Solution**:
 - Use `fork()` to create a child process.
@@ -1265,7 +1267,7 @@ int main() {
 
 
 
-### Modifying shell implementation with fork() (demo)
+### Modifying Shell Implementation with `fork()` (demo)
 
 **Objective**: Modify a simple shell to execute commands using `fork()` and `execve()`.
 
@@ -1274,7 +1276,7 @@ int main() {
 
 ---
 
-**Code Snippet**:
+**Key Code Snippet**:
 ```c
 #include <unistd.h>
 #include <sys/wait.h>
@@ -1358,9 +1360,13 @@ if (WIFEXITED(status)) {
 **Example**:
 ```c
 if (WIFEXITED(status)) {
+
     printf("Exited with code %d\n", WEXITSTATUS(status));
+
 } else if (WIFSIGNALED(status)) {
+
     printf("Killed by signal %d\n", WTERMSIG(status));
+
 }
 ```
 
@@ -1429,7 +1435,6 @@ if (child_pid > 0) {
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdio.h>
-
 int main() {
     pid_t cpid = fork();
     if (cpid == 0) { // Child sleeps for 5 seconds
@@ -1519,9 +1524,7 @@ int main() {
 ```c
 #include <unistd.h>
 #include <stdio.h>
-
 #define HELLO_NUMBER 10
-
 int main() {
     pid_t children[HELLO_NUMBER];
     for (int i = 0; i < HELLO_NUMBER; i++) {
@@ -1654,7 +1657,7 @@ Both read "1....line" (bytes 0–9).
    - Create pipes with `pipe()`.
    - Connect processes via pipe endpoints.
 
-**Homework**: Implement this logic to handle commands like:
+**Homework**: You will implement this logic to handle commands like:
 ```bash
 ls -l | grep ".txt" > output.txt
 ```
