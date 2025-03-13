@@ -39,7 +39,7 @@ independently at the same time.
 ---
 
 
-## Matrix Multiplication: Concurrent Parts?
+### Matrix Multiplication: Concurrent Parts?
 
 - **Formula**: `C = AB`  
 - Data: `a_i`, `B` or `A`, `b_j`  
@@ -49,7 +49,7 @@ independently at the same time.
 ---
 
 
-## Matrix Addition + Multiplication (Combined)
+### Matrix Addition + Multiplication (Combined)
 
 - **Addition**: `T = A + B`
 - **Multiplication**: `C = AB`
@@ -57,10 +57,11 @@ independently at the same time.
     - Data: A, B 
     - Tasks: Addition, Multiplication
     - **The same data, different concurrent tasks!**
+
 ---
 
+### Matrix Addition: Concurrent Parts?
 
-## Matrix Addition: Concurrent Parts?
 $$
 A =
 \begin{bmatrix}
@@ -89,16 +90,15 @@ a_{m1} + b_{m1} & a_{m2} + b_{m2} & \dots & a_{mn} + b_{mn}
 $$
 
 ---
-## Matrix Addition: Data parallelism
+
+### Matrix Addition: Data parallelism
 - **Data**: `a_ij`, `b_ij`  
 - **Task**: Addition  
 - **Parallelism**: The same task, different data!
 
 ---
 
-<!-- Slide 4 -->
-## Matrix Multiplication: Concurrent Parts?
-**Generic Example:**
+### Matrix Multiplication: Concurrent Parts?
 $$
 A =
 \begin{bmatrix}
@@ -129,7 +129,7 @@ $$
 ---
 
 
-## Matrix Multiplication: Concurrent Parts?
+### Matrix Multiplication: Concurrent Parts?
 
 - **Formula**: `C = AB`  
 - **Data**: `a_i`, `B` or `A`, `b_j`  
@@ -165,7 +165,7 @@ $$
 
 ---
 
-## Matrix Addition + Multiplication (Combined)
+### Matrix Addition + Multiplication (Combined)
 
 - **Addition**: `T = A + B`
 - **Multiplication**: `C = AB`
@@ -282,7 +282,7 @@ process may crash.
 
 ---
 
-## Pthreads API Categories
+### Pthreads API Categories
 
 1. **Thread Management**: Create, detach, join threads.
 2. **Mutexes**: Synchronize via "mutual exclusion".
@@ -292,7 +292,7 @@ process may crash.
 ---
 
 <!-- Slide 14 -->
-## Creating Threads
+### Creating Threads
 **`pthread_create` Function**
 ```c
 #include <pthread.h>
@@ -307,7 +307,7 @@ int pthread_create(
 
 ---
 
-## Example: Creating Threads
+### Example: Creating Threads
 
 ```c
 #include <pthread.h>
@@ -320,7 +320,7 @@ if (r != 0)
 ---
 
 
-## Thread Termination
+### Thread Termination
 A thread terminates when it
 1. **returns a value**:
     ```c
@@ -334,7 +334,7 @@ A thread terminates when it
 
 ---
 
-## Process Termination
+### Process Termination
 A multithreaded process terminates when:
 - Any thread calls `exit()`.
 - The `main()` function returns.
@@ -345,7 +345,7 @@ A multithreaded process terminates when:
 
 ---
 
-## Example: Creating and Terminating Threads
+### Example: Creating and Terminating Threads
 ```c
 #include <pthread.h>
 #include <stdio.h>
@@ -373,7 +373,7 @@ int main() {
 }
 ```
 
-## Joining and Detaching Threads
+### Joining and Detaching Threads
 `pthread_join`
 - Blocks the calling thread until the specified thread finishes.  
 ```c
@@ -389,7 +389,7 @@ int pthread_detach(pthread_t thread);
 ---
 
 
-## Thread Design Considerations
+### Thread Design Considerations
 
 - Organize the program into **independent tasks** that can execute
 concurrently.
@@ -407,7 +407,7 @@ concurrently.
 ---
 
 
-## Passing Arguments to Threads
+### Passing Arguments to Threads
 
 **Problem**:
 ```c
@@ -422,7 +422,7 @@ for(t = 0; t < NUM_THREADS; t++) {
 
 ---
 
-## Correct Argument Passing
+### Correct Argument Passing
 
 **:bulb:Solution**:
 ```c
@@ -459,7 +459,7 @@ int main() {
 
 ---
 
-## Miscellaneous Routines
+### Miscellaneous Routines
 - **Get Thread ID:**
   ```c
   pthread_t pthread_self(void);  // Returns the caller's thread ID
