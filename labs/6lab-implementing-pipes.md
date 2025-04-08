@@ -1,6 +1,6 @@
 
-### Lab Session: Process Management and Implmenting Pipes Using Standard Files
-- [Lab Session: Process Management and Implmenting Pipes Using Standard Files](#lab-session-process-management-and-implmenting-pipes-using-standard-files)
+### Lab Session: Process Management and Implementing Pipes Using Standard Files
+- [Lab Session: Process Management and Implementing Pipes Using Standard Files](#lab-session-process-management-and-implementing-pipes-using-standard-files)
   - [**Learning Objectives**](#learning-objectives)
   - [**Prerequisites**](#prerequisites)
 - [**Lab Tasks**](#lab-tasks)
