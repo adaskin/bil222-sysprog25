@@ -1,4 +1,12 @@
-
+---
+title: "memory management"
+author: "Ammar Daskin"
+marp: true
+paginate: true
+size: 16:10
+theme: default
+class: invert
+---
 # Intro to Multithreaded Programming with POSIX Threads
 
 Main resources:
