@@ -1,5 +1,4 @@
-# BIL 222 Lab: Memory Allocator
-- [BIL 222 Lab: Memory Allocator](#bil-222-lab-memory-allocator)
+# Lab Assignment: Multithreaded Demon Slayer Game
 - [Lab Assignment: Multithreaded Demon Slayer Game](#lab-assignment-multithreaded-demon-slayer-game)
   - [Key Concepts](#key-concepts)
   - [Objectives](#objectives)
@@ -20,9 +19,6 @@
     - [view.c](#viewc)
 
 ---
-
-
-# Lab Assignment: Multithreaded Demon Slayer Game
 
 ## Key Concepts  
 - posix threads
