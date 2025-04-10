@@ -1,4 +1,12 @@
-
+---
+title: "memory management"
+author: "Ammar Daskin"
+marp: true
+paginate: true
+size: 16:10
+theme: default
+class: invert
+---
 # Basic Memory Management  
 **System-Level Memory Operations**
  Memory allocation/deallocation is done by almost any application
