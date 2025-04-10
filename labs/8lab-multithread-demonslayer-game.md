@@ -26,7 +26,7 @@
 
 ## Key Concepts  
 - posix threads
-- **synrhonization is not included.**
+- **Synchronization is not included.**
 
 ## Objectives
 1. Implement multithreaded game entities using POSIX threads
