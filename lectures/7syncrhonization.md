@@ -45,6 +45,8 @@ int main() {
 }
 ```
 
+---
+
 ### Run & Compile 🚀
 
 ```bash
@@ -52,6 +54,8 @@ $ gcc main.c -pthread
 $ ./a.out 
 ??????????
 ```
+
+---
 
 Every run may result in different outputs:
 
@@ -165,6 +169,8 @@ void *countgold(void *param) {
 }
 ```
 
+---
+
 #### Basic Mutex Use
 
 ```c
@@ -177,6 +183,8 @@ void *countgold(void *param) {
     return NULL;
 }
 ```
+
+---
 
 #### Improved Efficiency with Local Variables
 
@@ -227,6 +235,8 @@ pthread_mutex_lock(&m2);
 a++;
 pthread_mutex_unlock(&m2);
 ```
+
+---
 
 **Problem**: This code creates two mutexes (`m1`, `m2`), but neither ensures mutual exclusion!
 
@@ -338,6 +348,8 @@ cond_signal(c2);  // Or: cond_broadcast(c2);
 mutex_unlock(m1);
 ```
 
+---
+
 #### **Thread 2**
 
 ```c
@@ -395,6 +407,8 @@ int pthread_cond_broadcast(pthread_cond_t *cond);
 // Wakes ALL waiting threads.
 ```
 
+---
+
 ### **Key Points**:
 - Always **acquire the mutex lock before waiting**:
   ```c
@@ -433,6 +447,8 @@ int main() {
 }
 ```
 
+---
+
 #### **Problem**:
 - The above code wastes CPU cycles with **busy-waiting**, continuously polling `avail`.
 
@@ -470,6 +486,8 @@ void *consumer(void *p) {
     }
 }
 ```
+
+---
 
 ### Explanation:
 - `pthread_cond_wait()` automatically:
@@ -520,6 +538,8 @@ void *consumer(void *ptr) {
     pthread_mutex_unlock(&m);
 }
 ```
+
+---
 
 #### **Key Features**:
 - **Buffer Overflow Protection**:
@@ -638,6 +658,8 @@ int is_empty() {
   return count == 0;  // Error: Unlock skipped after return!
 }
 ```
+
+---
 
 ### 🔍 **Errors**  
 1. **Separate mutexes** (`m1`/`m2`) → `count` is not protected.  

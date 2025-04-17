@@ -346,6 +346,19 @@ print("Results:", results)
  
 ---
 
+## 🤹 Coroutines: Cooperative Concurrency  
+**🆚 vs Threads**:  
+
+- User level language abstraction (they are stackless)
+- subroutines for cooperative multitasking 
+- Coroutines provide concurrency, but they do not provide parallelism
+- can be used with multi-thread dispatcher
+
+**🎯 Key Features**:  
+- Suspension/Resumption at specific points (`yield`)  
+- Minimal memory overhead (~KB vs threads' MB)  
+- Perfect for I/O-bound tasks (network/DB calls)  
+
 ---
 
 ## Python Coroutine Deep Dive  
