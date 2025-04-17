@@ -85,8 +85,6 @@ There is clearly a **race condition** when the end result changes based on how i
 - Use a **mutex** to protect access to shared variables.
 - Ensures that only **one thread** can modify a shared variable at a time.
 
----
-
 ### Condition Variables 🛎️
 
 - Inform another thread when the state of a shared variable changes.
@@ -347,8 +345,6 @@ while (need_to_wait_1) {
 cond_signal(c2);  // Or: cond_broadcast(c2);
 mutex_unlock(m1);
 ```
-
----
 
 #### **Thread 2**
 
