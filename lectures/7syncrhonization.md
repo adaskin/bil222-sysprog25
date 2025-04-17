@@ -85,6 +85,8 @@ There is clearly a **race condition** when the end result changes based on how i
 - Use a **mutex** to protect access to shared variables.
 - Ensures that only **one thread** can modify a shared variable at a time.
 
+---
+
 ### Condition Variables 🛎️
 
 - Inform another thread when the state of a shared variable changes.
