@@ -20,6 +20,7 @@
     - [mymalloc.c](#mymallocc-1)
 
 ---
+Prepared with DeepSeek-R1
 ## Key Concepts  
 - Dynamic memory allocation  
 - `sbrk()`  

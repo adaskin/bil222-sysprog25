@@ -15,6 +15,7 @@
   - [Recommended Implementation Order](#recommended-implementation-order)
 
 ---
+Prepared with DeepSeek-R1
 
 **Previous Lab Dependency:** [Lab 8: Multithread Demon Slayer Game](./8lab-multithread-demonslayer-game.md)  
 

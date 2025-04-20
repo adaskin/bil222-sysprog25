@@ -1,5 +1,4 @@
-**Lab Document: System Programming**  
-**Lab Session 1: Setting Up the Environment and Basic Unix Commands**  
+# Lab: Setting Up the Environment and Basic Unix Commands
 
 **this document is written with the help of DeepSeek.**
 

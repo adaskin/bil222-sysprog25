@@ -1,5 +1,6 @@
 # Lab Session: Creating a Simple Shell Program
 ---
+Prepared with DeepSeek-R1
 
 ## **Lab Objective**  
 Reinforce understanding of file I/O system calls (`open`, `read`, `write`, `close`) and process creation (`fork`, `exec`).  

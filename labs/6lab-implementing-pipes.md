@@ -19,6 +19,7 @@
 - [**Lab Report Submission:**](#lab-report-submission)
 
 ---
+Prepared with DeepSeek-R1
 
 #### **Learning Objectives**
 By the end of this lab, students will be able to:

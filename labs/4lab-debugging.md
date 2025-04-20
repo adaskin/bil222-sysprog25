@@ -1,5 +1,7 @@
 # Lab Document: Debugging with GDB and Valgrind
 
+Prepared with DeepSeek-R1
+
 ## Prerequisites
 - GCC, GDB, and Valgrind installed.
 - Basic familiarity with terminal commands and C syntax.

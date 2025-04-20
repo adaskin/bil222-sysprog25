@@ -19,6 +19,7 @@
     - [view.c](#viewc)
 
 ---
+Prepared with DeepSeek-R1
 
 ## Key Concepts  
 - posix threads

@@ -1,7 +1,7 @@
-**Lab Document: System Programming**  
-**Lab Session 2: C arrays, file I/O, strings, intro to GUI**  
 
-**this document is written with the help of DeepSeek.**
+# Lab: C arrays, file I/O, strings, intro to GUI**  
+
+**Prepared with DeepSeek-R1**
 
 ---
 

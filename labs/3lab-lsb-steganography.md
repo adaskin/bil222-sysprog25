@@ -1,5 +1,7 @@
 ### Lab Document: Hiding Messages in Images Using Least Significant Bits (LSB)
 
+Prepared with DeepSeek-R1
+
 #### Lab Objectives:
 1. Understand the structure of BMP files and pixel manipulation.
 2. Use `typedef` to define pixel and image structures.
