@@ -385,6 +385,8 @@ A situation where two or more threads are **blocked forever**, each waiting for 
 - **Thread 1**: Holds Lock A, requests Lock B.
 - **Thread 2**: Holds Lock B, requests Lock A.
 
+---
+
 ### Conditions (Coffman Conditions)
 1. **Mutual Exclusion**: Resources cannot be shared.
 2. **Hold and Wait**: Processes hold resources while requesting new ones.
@@ -485,6 +487,8 @@ void *philosopher2(void *arg) {
 - Introduce a **central mutex** (waiter) to control chopstick access.
 - **Drawback**: Reduced parallelism.
 
+---
+
 ### 2. Hierarchical Ordering (Dijkstra's Solution)
 - **Rule**: Philosophers pick **lower-numbered chopstick first**.
 - **Example**:
@@ -508,6 +512,7 @@ void *philosopher_safe(void *arg) {
     }
 }
 ```
+---
 
 ### 3. Limited Philosophers
 - Restrict the number of philosophers allowed to eat simultaneously.
