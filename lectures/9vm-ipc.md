@@ -209,6 +209,19 @@ sequenceDiagram
 ```
 
 ---
+```
+Physical Memory
++-------------------+
+| Frame 42: "AB"    |  ← Shared by both processes
++-------------------+
+
+Process A Virtual Space       Process B Virtual Space
++-------------------+        +-------------------+
+| X: 0x1000 → Frame 42 |     | Y: 0x3000 → Frame 42 |
++-------------------+        +-------------------+
+```
+
+---
 
 #### Example Workflow with Semaphores:
 ```c
