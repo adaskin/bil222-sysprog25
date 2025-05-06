@@ -1,10 +1,14 @@
-all: server drone_client view
+#TODO edit make file for your project
+UNAME := $(shell uname -s)
+ifeq ($(UNAME), Linux)
+	CFLAGS = -lSDL2
+endif
+ifeq ($(UNAME), Darwin)
+	CFLAGS = -F/Library/Frameworks -framework SDL2
+endif
 
-server: server.c list.c model.c json_utils.c
-    gcc -o $@ $^ -lpthread -ljson-c
+all: list.c view.c survivor.c controller.c drone.c map.c ai.c
+	gcc *.c $(CFLAGS)
 
-drone_client: drone_client.c list.c json_utils.c
-    gcc -o $@ $^ -ljson-c
-
-view: view.c model.c list.c
-    gcc -o $@ $^ -lSDL2
+clean:
+	rm -f *.o *.out

@@ -8,7 +8,7 @@ ifeq ($(UNAME), Darwin)
 endif
 
 all: list.c view.c survivor.c controller.c drone.c map.c ai.c
-	gcc list.c view.c model.c controller.c $(CFLAGS)
+	gcc *.c $(CFLAGS)
 
 clean:
 	rm -f *.o *.out
