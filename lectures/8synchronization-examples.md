@@ -148,9 +148,12 @@ void read() {
     unlock(&m);
 }
 ```
+---
+
 - **Key Features**:
   - Writers register intent via `writers++`, forcing new readers to wait.
   - `cond_broadcast` ensures all waiting threads recheck conditions.
+see also [pthread_rwlock](https://www.man7.org/linux/man-pages/man3/pthread_rwlock_rdlock.3p.html)
 
 ---
 
