@@ -137,17 +137,6 @@ close(client_fd);//in server only
 close(sfd);
 ```
 
----
-
-### Shared Workflow Phase
-```mermaid
-graph LR
-    S[Data Transfer Phase] -->|TCP| BBi-directional]
-    S -->|UDP| U((Unidirectional))
-    B -->|send()/recv()| C[Both sides]
-    U -->|sendto()/recvfrom()| D[Either side]
-```
-
 
 ---
 
@@ -167,7 +156,7 @@ int main() {
 
     int sfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+    bind(sfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
 
     listen(sfd, 10);
 
@@ -179,6 +168,8 @@ int main() {
     send(client_fd, "Hello from server", 17, 0);
 }
 ```
+
+---
 
 ### Client Implementation
 ```c
