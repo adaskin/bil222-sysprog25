@@ -133,6 +133,7 @@ recv(sfd, buffer, 1024, 0);
 
 4. **Terminate**
 ```c
+close(client_fd);//in server only
 close(sfd);
 ```
 
