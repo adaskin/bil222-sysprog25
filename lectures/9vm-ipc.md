@@ -1,6 +1,11 @@
 
 # Virtual Memory & IPC
 
+[Virtual Memory Overview](#virtual-memory-overview)
+[Virtual Memory and IPC](#virtual-memory--ipc)
+[IPC with Shared Memory: mmap()](#ipc-with-mmap--shared-memory)
+[IPC with Pipes](#ipc-with-pipes)
+[IPC with POSIX Message Queues](#ipc-with-posix-message-queues)
 *Edited based on last year lecture slides by using DeepSeek-R1*
 
 ---
@@ -121,10 +126,6 @@ IPC mechanisms rely on bypassing virtual memory isolation, either via kernel API
 - Virtual memory concepts are foundational for understanding process isolation and IPC.  
 - You’ll explore advanced topics (e.g., page replacement algorithms) in **BIL 301 OS**.  
 - Experiment with `mmap` and pipes in labs to see these concepts in action! 🔍💻
-
----
-
-Lecture-2
 
 ---
 
@@ -277,10 +278,6 @@ sem_post(&shmp->sem2);  // Signal completion
 
 **Lab Tip**:  
 Experiment with `mmap` to implement a producer-consumer system. Use semaphores for thread-safe operations! 🚀
-
----
-
-Lecture-3
 
 ---
 
@@ -456,3 +453,115 @@ pipe2(pipefd, O_CLOEXEC);  // Auto-close pipe on exec
 
 **Lab Challenge**:  
 Implement a 3-stage pipeline (`ls → grep → wc`) using `pipe()` and `dup2`. Measure performance against shell pipelines! ⏱️🔧
+
+
+---
+
+# IPC with POSIX Message Queues
+[from GNU](https://www.gnu.org/software/gnulib/manual/html_node/mqueue_002eh.html)
+mqueue.h is not supported by: macOS 14, FreeBSD 6.0, NetBSD 3.0, OpenBSD 7.5, Minix 3.1.8, Cygwin 1.5.x, mingw, MSVC 14, Android 9.0.
+[POSIX specification](https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/mqueue.h.html)
+ 
+Real time extension of POSIX standards, it is highly used in Linux-based systems.
+
+---
+
+## Overview & Key Concepts  
+- **Kernel-Managed IPC (and synchronization)**: Messages are stored in a kernel-managed queue.  
+- **Structured Communication**: Preserves message boundaries (unlike pipes).  
+- **Features**:  
+  - Messages have **priorities** (higher priority messages are read first).  
+  - Named queues (`/name` format) for unrelated processes.  
+  - Persistent until explicitly removed or system reboot.  
+
+---
+
+## Core Functions  
+```c  
+#include <mqueue.h>  
+// Open/create a queue  
+mqd_t mq_open(const char *name, int oflag, mode_t mode, struct mq_attr *attr);  
+// Send/receive messages  
+int mq_send(mqd_t mqdes, const char *msg_ptr, size_t msg_len, unsigned int msg_prio);  
+ssize_t mq_receive(mqd_t mqdes, char *msg_ptr, size_t msg_len, unsigned int *msg_prio);  
+// Close/unlink queue  
+int mq_close(mqd_t mqdes);  
+int mq_unlink(const char *name);  
+```  
+
+---
+
+## Queue Attributes  
+Configured via `struct mq_attr`:  
+```c  
+struct mq_attr {  
+    long mq_flags;    // Flags (0 or O_NONBLOCK)  
+    long mq_maxmsg;   // Max messages in queue  
+    long mq_msgsize;  // Max size per message (bytes)  
+    long mq_curmsgs;  // Current messages in queue (read-only)  
+};  
+```  
+
+---
+
+## Example: Sender & Receiver  
+**Sender Code** (compile with `-lrt`):  
+```c  
+#include <mqueue.h>  
+#include <stdio.h>  
+
+int main() {  
+    mqd_t mq = mq_open("/my_queue", O_CREAT | O_WRONLY, 0644, NULL);  
+    mq_send(mq, "Hello from sender!", 19, 0);  
+    mq_close(mq);  
+    return 0;  
+}  
+```  
+
+**Receiver Code**:  
+```c  
+#include <mqueue.h>  
+#include <stdio.h>  
+
+int main() {  
+    mqd_t mq = mq_open("/my_queue", O_RDONLY);  
+    char buf[1024];  
+    mq_receive(mq, buf, 1024, NULL);  
+    printf("Received: %s\n", buf);  
+    mq_close(mq);  
+    mq_unlink("/my_queue");  
+    return 0;  
+}  
+```  
+
+---
+
+## Workflow Diagram  
+```mermaid  
+sequenceDiagram  
+    Process A->>Kernel: mq_open("/app_queue", O_CREAT)  
+    Process A->>Kernel: mq_send("Data", priority=5)  
+    Process B->>Kernel: mq_open("/app_queue", O_RDONLY)  
+    Process B->>Kernel: mq_receive()  
+    Kernel-->>Process B: "Data" (priority 5)  
+```  
+
+---
+
+## Pros & Cons  
+| **Pros**                          | **Cons**                          |  
+|-----------------------------------|-----------------------------------|  
+| Structured messages with priority | Kernel overhead                   |  
+| Asynchronous communication        | Message size limits               |  
+| Persistence across process exits  | Requires explicit unlinking       |  
+
+---
+
+## Lab Challenge  
+Implement a **task scheduler** where multiple clients send tasks (with priorities) to a server via a message queue. The server executes tasks in priority order! 🚀  
+
+**Tip**: Use `mq_getattr` to monitor queue status and `fork()` for concurrent task processing.  
+
+---
+
+**Next Lecture**: Signals and their role in IPC!
