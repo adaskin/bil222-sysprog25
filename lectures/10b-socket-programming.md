@@ -1,13 +1,14 @@
 # Sockets Programming
 Sockets (Berkeley Sockets) are Application Programming Interfaces (API) 
 * Sockets are not protocol
-* We will see socket programming
+1. [Socket API Overview](#socket-api-overview)
   * That uses UDP
   * That uses TCP
-  - And see kernel implementation of Transport Layer Security(TLS) encryption protocol over TCP 
-  - OpenSSL
-https://www.kernel.org/doc/html/latest/networking/tls.html
+2. [Concurrency Models](#concurrency-models)
+3. [Asynchronous I/O Techniques](#asynchronous-io-techniques)
+4. [Code Patterns](#code-patterns)
 
+---
 
 ### Socket API Overview
 ```c
@@ -82,6 +83,8 @@ struct sockaddr_in addr = {
 };
 ```
 
+---
+
 2. **Bind & Listen** Associate address and listen
 ```c
 bind(sfd, (struct sockaddr*)&addr, sizeof(addr));
@@ -97,7 +100,7 @@ listen(sfd, 10);
 int sfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 ```
 
-1. **Connect**
+2. **Connect**
 ```c
 struct sockaddr_in srv_addr = {
   .sin_family = AF_INET,
@@ -145,9 +148,7 @@ close(sfd);
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
-
 #define PORT 5100
-
 int main() {
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
@@ -168,17 +169,16 @@ int main() {
     send(client_fd, "Hello from server", 17, 0);
 }
 ```
+*for full implementation see [server.c](10-networking/server.c)*
 
 ---
 
-### Client Implementation
+### Client Implementation 
 ```c
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
-
 #define PORT 5100
-
 int main() {
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
@@ -194,6 +194,7 @@ int main() {
     printf("Response: %s\n", buffer);
 }
 ```
+*for full implementation see [client.c](10-networking/client.c)*
 
 ---
 
@@ -269,8 +270,8 @@ Server: HTTP/1.1 101 Switching Protocols
 
 ## Security Considerations
 - **TLS/SSL**: Encryption at Transport Layer
-- **Authentication**: OAuth, SAML, OpenID
-- **Access Control**: Role-based permissions
+  - https://www.kernel.org/doc/html/latest/networking/tls.html
+- **Access Control**: OAuth, SAML, OpenID
 
 ---
 
