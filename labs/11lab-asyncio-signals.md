@@ -30,13 +30,16 @@
 ## Details
 In this lab, you are going to design a SIGIO handler for asynchronous I/O and combine this with pipes to do a kind of asynchronous communication.
 
-Using fcntl(2) - Linux manual page , you can change settings on file descriptors:
+Using fcntl(2) - Linux manual page , you can change settings on file descriptors: 
+
  ``fcntl(fd, F_SETOWN, getpid());``
-  - This changes who gets SIGIO when a change happens on fd. Another setting is
+- This changes who gets SIGIO when a change happens on fd. Another setting is
+
 ``fcntl(fd, F_SETFL, O_ASYNC);``
-  - This enables generations of SIGIO on fd. 
+- This enables generations of SIGIO on fd. 
+
 ``fcntl(fd, F_SETFL, O_NONBLOCK);``
-  - This makes calls like ``read(fd,..)`` nonblocking.
+- This makes calls like ``read(fd,..)`` nonblocking.
 
 Therefore, we can design a program that is informed when an input is given to fd.
 
