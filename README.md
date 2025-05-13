@@ -23,9 +23,6 @@ BIL 222 System Programming(Spring 2025, Dept of Computer Engineering, Istanbul M
 - [Collaboration and Cheating Policy](#collaboration-and-cheating-policy)
 - [Use of AI, GPT, Gemini, DeepSeek, etc.](#use-of-ai-gpt-gemini-deepseek-etc)
   - [Example use and prompts:](#example-use-and-prompts)
-    - [**General prompts related to Lectures \& Theory**](#general-prompts-related-to-lectures--theory)
-    - [**Prompts for Code Examples**](#prompts-for-code-examples)
-    - [**Labs \& Assignments**](#labs--assignments)
 
 ## Meeting Times
 - Labs on wednesdays,
@@ -73,7 +70,7 @@ During the semester, in addition to weekly lectures and lab sessions, there are 
 9. Intro to Threads and Parallel Computation (dask and data parallelism, coroutines, green threads, goroutines) 
 10. Synchronization (mutexes, condition variables, monitors, thread safe data structures)
 11. Reader/writer problem, Deadlock, livelock
-12. A brief discussion of virtual memory & Inter process communication (pipes/mmap etc)
+12. A brief discussion of virtual memory & Inter process communication (pipes/mmap/mqueues)
 13. Networking(Network Protocols, TCP, UDP, HTTP, WebSocket etc.)-Socket programming-I  
 14. Signals & Socket programming-II, Filesystems
 15. Final-Review
